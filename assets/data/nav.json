@@ -1,0 +1,22 @@
+[
+    {
+        "putanja":"#home",
+        "ime":"Home"
+    },
+    {
+        "putanja":"#beer-choice",
+        "ime":"Shop"
+    },
+    {
+        "putanja":"#gallery",
+        "ime":"Gallery"
+    },
+    {
+        "putanja":"#contact",
+        "ime":"Contact"
+    },
+    {
+        "putanja":"#",
+        "ime":"about"
+    }
+]

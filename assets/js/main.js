@@ -66,6 +66,11 @@ $(document).ready(function()
         {
             //console.log(data);
             addBeer(data);
+            setItemToLS("piva", data);
+            var porudzbine = getItemFromLS("porudzbineKorpa");
+            var svaPiva = getItemFromLS("piva");
+            console.log(porudzbine);
+            console.log(svaPiva);
             
             //Sortriranje pive
             let sort = document.querySelector("#sort");
@@ -143,17 +148,15 @@ $(document).ready(function()
             let beerCartCounter = document.getElementById("cart-counter");
             let dugme = document.getElementsByClassName("dugme");
             //CART
-            let korpaTabela = document.querySelector("#korpaTabela");
     
             beerCartCounter.value = 0;
             for(let i = 0; i < dugme.length; i++)
             {
                 dugme[i].addEventListener("click", function()
                 {
+                    dodajUKorpu(dugme[i]);
                     let roditelj = this.parentElement;
-                    let deca = roditelj.childNodes;
-                    console.log(deca[2]);
-                    console.log(typeof(beerCartCounter.value));
+
                     var d = $('.dialog').dialog({
                         dialogClass: "no-close",
                         resizable: false
@@ -163,15 +166,18 @@ $(document).ready(function()
                     beerCartCounter.value = konverzija + 1;
 
 
-                    //KORPA
-                    korpaTabela.innerHTML += `<tr>
-                    <td><img src="${deca[1].src}" alt="${deca[1].alt}" class="img-fluid w-25"/></td>
-                    <td>${deca[1].alt}</td><td>Flasa</td><td>3</td><td>50</td><td>210</td>`;
+                    //KORPA KORPA KORPA KORPA KORPA KORPA KORPA
+
+                    // rezultat = data.filter(e => e.id == roditelj.id);
+                    
+                    // dodajPorudzbinu(rezultat);
+                    displayCartData(data);
+                    
                 })
                 //console.log(beerCartCounter.value);
             }
             $(".about").click(aboutAuthor);
-            $(".cart").click(addToCart);//povdee stao
+            $(".cart").click(prikaziKorpu);//povdee stao
         },
         error: function(xhr)
         {
@@ -468,7 +474,7 @@ function makeBeer(beer)
         <tr><td><p class="text-primary">Type:</p></td> <td><p>${beer.typeBeer}</p></td></tr>
         <tr><td><p class="text-primary">Price:</p></td><td><p> ${beer.price} RSD</p></td></tr>
         </table>
-        <input type="button" class="dugme btn btn-warning add-to-cart w-100 text-white rounded display-1" value="Add to cart"/>
+        <input type="button" data-id="${(beer.dataid)}" class="dugme btn btn-warning add-to-cart w-100 text-white rounded display-1" value="Add to cart"/>
     </div>`;
 }
 
@@ -492,7 +498,7 @@ function aboutAuthor(e)
         $("#about-author").hide();
     })
 }
-function addToCart(e)
+function prikaziKorpu(e)
 {
     e.preventDefault();
     $("#add-to-cart").show();
@@ -759,4 +765,92 @@ function sortiranje(vrednost, podatak)
         default:
             console.log("Pocetno sortiranje");
     }
+}
+
+function ispisiKorpu(artikli)
+{
+    let ispis = "";
+    let korpaTabela = document.querySelector("#korpaTabela");
+    for(let artikl of artikli)
+    {
+        ispis += napraviPorudzbinu(artikl);
+    }
+    korpaTabela.innerHTML = ispis;
+}
+
+function napraviPorudzbinu(artikl)
+{
+    return `<tr>
+    <td><img src="${artikl.img.src}" alt="${artikl.img.alt}" class="img-fluid w-25"/></td>
+    <td>${artikl.beerName}</td>
+    <td>${artikl.typeBeer}</td>
+    <td>${artikl.price}</td>
+    <td>${artikl.quantity}</td>
+    <td>${artikl.price * artikl.quantity}</td>
+    </tr>`;
+}
+function dodajUKorpu(param){
+
+    function dohvatiArtikal(porudzbina, id)
+    {
+        return porudzbina.products.find(e => e.id === id)
+    }
+
+
+    const id = Number($(param).attr('data-id'));
+
+    // Dohvati porudžbinu
+    var porudzbina = getItemFromLS("porudzbineKorpa");
+
+    // Ako ne postoji, napravi novu porudžbinu
+    if(!porudzbina)
+    {
+        porudzbina = {
+            products: []
+        }
+    }
+    
+    // Dohvati artikal iz porudžbine (ako postoji)
+    const artikal = dohvatiArtikal(porudzbina, id);
+    if (artikal) {
+        artikal.quantity += 1;
+    }
+    else {
+        // Ako artikal ne postoji, napravi novi
+        porudzbina.products.push({
+            id: id,
+            quantity: 1
+        });
+    }
+    
+   
+    // Snimi izmenjenu porudžbinu u local storage
+    setItemToLS("porudzbineKorpa", porudzbina);
+}
+function setItemToLS(naziv, porudzbine)
+{
+    localStorage.setItem(naziv, JSON.stringify(porudzbine));
+}
+function getItemFromLS(name)
+{
+    return JSON.parse(localStorage.getItem(name));
+}
+function productsInCart() 
+{
+    return JSON.parse(localStorage.getItem("porudzbineKorpa"));
+}
+function displayCartData(piva) 
+{
+    const zaIspis = [];
+    let korpa = productsInCart();
+
+    for (const pivo of piva) {
+        const prod = korpa.products.find(el => pivo.dataid === el.id);
+
+        if (prod) {
+            zaIspis.push({...pivo, ...prod});
+        }
+    }
+
+    ispisiKorpu(zaIspis)
 }

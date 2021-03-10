@@ -17,6 +17,10 @@
     },
     {
         "putanja":"#",
+        "ime":"cart"
+    },
+    {
+        "putanja":"#",
         "ime":"about"
     }
 ]

@@ -142,26 +142,36 @@ $(document).ready(function()
             //BROJAC KORPE
             let beerCartCounter = document.getElementById("cart-counter");
             let dugme = document.getElementsByClassName("dugme");
+            //CART
+            let korpaTabela = document.querySelector("#korpaTabela");
+    
             beerCartCounter.value = 0;
             for(let i = 0; i < dugme.length; i++)
             {
                 dugme[i].addEventListener("click", function()
                 {
+                    let roditelj = this.parentElement;
+                    let deca = roditelj.childNodes;
+                    console.log(deca[2]);
                     console.log(typeof(beerCartCounter.value));
                     var d = $('.dialog').dialog({
                         dialogClass: "no-close",
                         resizable: false
                     });
-                    setTimeout(function()
-                    {
-                        $('.dialog').dialog('close');                
-                    }, 2000);
+                    setTimeout(function(){$('.dialog').dialog('close');}, 2000);
                     let konverzija = Number(beerCartCounter.value);
                     beerCartCounter.value = konverzija + 1;
+
+
+                    //KORPA
+                    korpaTabela.innerHTML += `<tr>
+                    <td><img src="${deca[1].src}" alt="${deca[1].alt}" class="img-fluid w-25"/></td>
+                    <td>${deca[1].alt}</td><td>Flasa</td><td>3</td><td>50</td><td>210</td>`;
                 })
                 //console.log(beerCartCounter.value);
             }
             $(".about").click(aboutAuthor);
+            $(".cart").click(addToCart);//povdee stao
         },
         error: function(xhr)
         {
@@ -385,6 +395,8 @@ $(document).ready(function()
         runEffect();
         return false;
     });
+
+
 });
 
 function addNav(podaci)
@@ -468,11 +480,7 @@ function runEffect()
     $(".show-more-text").removeClass("d-none");
     $(".show-more-text" ).toggle("blind");
 }
-// function callback() {
-//     setTimeout(function() {
-//       $( ".show-more-text" ).removeAttr( "style" ).hide().fadeIn();
-//     }, 1000 );
-//   };
+
 function aboutAuthor(e)
 {
     e.preventDefault();
@@ -482,6 +490,17 @@ function aboutAuthor(e)
     $(".close").click(function()
     {
         $("#about-author").hide();
+    })
+}
+function addToCart(e)
+{
+    e.preventDefault();
+    $("#add-to-cart").show();
+    console.log("true");
+    
+    $(".close").click(function()
+    {
+        $("#add-to-cart").hide();
     })
 }
 function slideShow()
@@ -614,6 +633,11 @@ function checkForm()
 
     if(counter === 4)
     {
+        document.cookie = `ime=${name.value}`;
+        document.cookie = `prezime=${surname.value}`;
+        document.cookie = `adresa=${address.value}`;
+        document.cookie = `email=${email.value}`;
+
         document.getElementById("myModal").style.display = "block";
         let span = document.getElementsByClassName("close")[0];
         span.addEventListener("click", () => {

@@ -1,6 +1,7 @@
 [
     {
         "id": "pivo1",
+        "dataid": 1,
         "beerName":"Argus",
         "typeBeer":"Bottle",
         "price": 45,
@@ -12,6 +13,7 @@
     },
     {
         "id": "pivo2",
+        "dataid": 2,
         "beerName":"Bip",
         "typeBeer":"Bottle",
         "price": 70,
@@ -23,6 +25,7 @@
     },
     {
         "id": "pivo3",
+        "dataid": 3,
         "beerName":"Dilemma - IPA",
         "typeBeer":"Craft",
         "price": 250,
@@ -34,6 +37,7 @@
     },
     {
         "id": "pivo4",
+        "dataid": 4,
         "beerName":"Dilemma - ALE",
         "typeBeer":"Craft",
         "price": 250,
@@ -45,6 +49,7 @@
     },
     {
         "id": "pivo5",
+        "dataid": 5,
         "beerName":"Dogma - Albino",
         "typeBeer":"Craft",
         "price": 290,
@@ -56,6 +61,7 @@
     },
     {
         "id": "pivo6",
+        "dataid": 6,
         "beerName":"Dogma - Hoptopod",
         "typeBeer":"Craft",
         "price": 290,
@@ -67,6 +73,7 @@
     },
     {
         "id": "pivo7",
+        "dataid": 7,
         "beerName":"Dogma - Svetionik",
         "typeBeer":"Craft",
         "price": 290,
@@ -78,6 +85,7 @@
     },
     {
         "id": "pivo8",
+        "dataid": 8,
         "beerName":"Dvorog - Zduhač",
         "typeBeer":"Craft",
         "price": 300,
@@ -89,6 +97,7 @@
     },
     {
         "id": "pivo9",
+        "dataid": 9,
         "beerName":"Heineken",
         "typeBeer":"Bottle",
         "price": 90,
@@ -100,6 +109,7 @@
     },
     {
         "id": "pivo10",
+        "dataid": 10,
         "beerName":"Jelen",
         "typeBeer":"Bottle",
         "price": 55,
@@ -111,6 +121,7 @@
     },
     {
         "id": "pivo11",
+        "dataid": 11,
         "beerName":"Kabinet - Moon",
         "typeBeer":"Craft",
         "price": 310,
@@ -122,6 +133,7 @@
     },
     {
         "id": "pivo12",
+        "dataid": 12,
         "beerName":"Lav",
         "typeBeer":"Bottle",
         "price": 55,
@@ -133,6 +145,7 @@
     },
     {
         "id": "pivo13",
+        "dataid": 13,
         "beerName":"Lowenbrau",
         "typeBeer":"Bottle",
         "price": 65,
@@ -144,6 +157,7 @@
     },
     {
         "id": "pivo14",
+        "dataid": 14,
         "beerName":"Niksic",
         "typeBeer":"Bottle",
         "price": 55,
@@ -155,6 +169,7 @@
     },
     {
         "id": "pivo15",
+        "dataid": 15,
         "beerName":"Paulaner",
         "typeBeer":"Wheat",
         "price": 110,

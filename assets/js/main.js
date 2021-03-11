@@ -177,13 +177,25 @@ $(document).ready(function()
             }
             $(".about").click(aboutAuthor);
             $(".cart").click(prikaziKorpu);//povdee stao
+
+            //Brisanje
+            let obrisi = document.getElementsByClassName("remove");
+            for(let i = 0; i < obrisi.length; i++)
+            {
+                obrisi[i].addEventListener("click", function(){
+                    this.parentElement.parentElement.remove();
+                });
+            }
         },
         error: function(xhr)
         {
             console.log(xhr);
         }
+        
+                
     });
 
+    
     //jQuery hambruger
     $("#hamburger-btn").click(function(){
         $("#my-side-nav").css("display", "block");
@@ -400,8 +412,6 @@ $(document).ready(function()
         runEffect();
         return false;
     });
-
-
 });
 
 function addNav(podaci)
@@ -445,6 +455,7 @@ function addNav(podaci)
             activeA = a;
         })
     }
+
 }
 function makeNav(podatak)
 {
@@ -776,6 +787,7 @@ function ispisiKorpu(artikli)
         <th>Price</th>
         <th>Quantity</th>
         <th>Sum price</th>
+        <th>Remove</th>
     </tr>`;
     let korpaTabela = document.querySelector("#korpaTabela");
     for(let artikl of artikli)
@@ -792,10 +804,12 @@ function napraviPorudzbinu(artikl)
     <td>${artikl.beerName}</td>
     <td>${artikl.typeBeer}</td>
     <td>${artikl.price}</td>
-    <td>${artikl.quantity}<br/><button type="button" id="plus">+</button> <button type="button" id="minus">-</button></td>
+    <td>${artikl.quantity}</td>
     <td>${artikl.price * artikl.quantity}</td>
+    <td><input type="button" value="Remove" class="btn btn-warning text-white remove"/></td>
     </tr>`;
 }
+
 function dodajUKorpu(param){
 
     function dohvatiArtikal(porudzbina, id)

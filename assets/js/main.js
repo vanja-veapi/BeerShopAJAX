@@ -69,8 +69,7 @@ $(document).ready(function()
             setItemToLS("piva", data);
             var porudzbine = getItemFromLS("porudzbineKorpa");
             var svaPiva = getItemFromLS("piva");
-            console.log(porudzbine);
-            console.log(svaPiva);
+            displayCartData(data);
             
             //Sortriranje pive
             let sort = document.querySelector("#sort");
@@ -769,13 +768,21 @@ function sortiranje(vrednost, podatak)
 
 function ispisiKorpu(artikli)
 {
-    let ispis = "";
+    let ispis = `<table id="korpaTabela" class="table table-striped">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sum price</th>
+    </tr>`;
     let korpaTabela = document.querySelector("#korpaTabela");
     for(let artikl of artikli)
     {
         ispis += napraviPorudzbinu(artikl);
     }
-    korpaTabela.innerHTML = ispis;
+    korpaTabela.innerHTML = ispis + "</table>";
 }
 
 function napraviPorudzbinu(artikl)
@@ -785,7 +792,7 @@ function napraviPorudzbinu(artikl)
     <td>${artikl.beerName}</td>
     <td>${artikl.typeBeer}</td>
     <td>${artikl.price}</td>
-    <td>${artikl.quantity}</td>
+    <td>${artikl.quantity}<br/><button type="button" id="plus">+</button> <button type="button" id="minus">-</button></td>
     <td>${artikl.price * artikl.quantity}</td>
     </tr>`;
 }
@@ -844,7 +851,12 @@ function displayCartData(piva)
     const zaIspis = [];
     let korpa = productsInCart();
 
-    for (const pivo of piva) {
+    for (const pivo of piva) 
+    {
+        if(korpa == null)
+        {
+            break;
+        }
         const prod = korpa.products.find(el => pivo.dataid === el.id);
 
         if (prod) {

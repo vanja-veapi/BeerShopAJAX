@@ -170,6 +170,7 @@ $(document).ready(function()
                     // rezultat = data.filter(e => e.id == roditelj.id);
                     
                     // dodajPorudzbinu(rezultat);
+                    
                     displayCartData(data);
                     
                 })
@@ -178,14 +179,6 @@ $(document).ready(function()
             $(".about").click(aboutAuthor);
             $(".cart").click(prikaziKorpu);//povdee stao
 
-            //Brisanje
-            let obrisi = document.getElementsByClassName("remove");
-            for(let i = 0; i < obrisi.length; i++)
-            {
-                obrisi[i].addEventListener("click", function(){
-                    this.parentElement.parentElement.remove();
-                });
-            }
         },
         error: function(xhr)
         {
@@ -194,7 +187,7 @@ $(document).ready(function()
         
                 
     });
-
+    
     
     //jQuery hambruger
     $("#hamburger-btn").click(function(){
@@ -514,6 +507,16 @@ function prikaziKorpu(e)
     $("#add-to-cart").show();
     console.log("true");
     
+    //Brisanje
+    var obrisi = document.getElementsByClassName("remove");
+    for(let i = 0; i < obrisi.length; i++)
+    {
+        obrisi[i].addEventListener("click", function(){
+            localStorage.removeItem("porudzbineKorpa");
+            this.parentElement.parentElement.remove();
+        });
+    }
+
     $(".close").click(function()
     {
         $("#add-to-cart").hide();

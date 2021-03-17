@@ -620,6 +620,30 @@ footer
         font-size: 5.5vw;
     }
 }
+@media screen and (max-width: 696px)
+{
+    #add-to-cart .modal-content
+    {
+        width: 100%;
+    }
+
+}
+@media screen and (max-width: 560px)
+{
+    #korpaTabela
+    {
+        font-size: 0.8rem;
+    }
+    .table th, .table td
+    {
+        padding: 0;
+        vertical-align: middle;
+    }
+    .remove
+    {
+        font-size: 0.6rem;
+    }
+}
 @media screen and (max-width: 420px)
 {
     .w-75
@@ -666,6 +690,13 @@ footer
     .ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-draggable 
     {
         max-width: 80vw !important;
+    }
+}
+@media screen and (max-width: 360px)
+{
+    .table th, .table td
+    {
+        font-size: 10px;
     }
 }
 @media screen and (max-width: 310px)
